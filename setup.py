@@ -13,7 +13,7 @@ setup(
     keywords = "python django facebook youtube dailymoion vimeo photos videos",
     url = "http://github.com/sem-io/django-mediamapper",
     install_requires = ['BeautifulSoup>=3.2.0', 'oauth2', 'elementtree'],
-    dependency_links = ['https://github.com/sem-io/facebook-sdk-fork#facebook_sdk', 'http://github.com/twidi/django-extended-choices.git#egg=extended_choices', 'git://github.com/dkm/python-vimeo.git#egg=vimeo'],
+    dependency_links = ['http://github.com/sem-io/facebook-sdk-fork#facebook_sdk#egg=facebook', 'http://github.com/twidi/django-extended-choices.git#egg=extended_choices', 'git://github.com/dkm/python-vimeo.git#egg=vimeo'],
 
     classifiers = [
         'Development Status :: 0.1 - Early Alpha',
