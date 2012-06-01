@@ -28,7 +28,7 @@
 
 <div id="services_type">
 {% for t in content_type.config.types %}
-    <a href="" class="{{ t }} {% if forloop.first %}active{% endif %}">{{ t }}</a>
+    <a href="" class="{% if forloop.first %}active {% endif %}{{ t }}">{{ t }}</a>
 {% endfor %}
 </div>
 <div class="services_type video" type="video">
