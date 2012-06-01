@@ -1,0 +1,9 @@
+{% for field in form.visible_fields %}
+	{% if forloop.first %}
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
+	{% endif %}
+	{% include "base/form_field.html" %}
+{% endfor %}
+{% include "base/form_errors.html" %}

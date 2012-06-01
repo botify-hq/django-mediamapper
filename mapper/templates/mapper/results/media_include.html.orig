@@ -1,0 +1,28 @@
+{% load mapper_utils %}
+<<<<<<< HEAD
+<div class="res_item" service_id="{{ media.service.id }}">
+	<div class="res_item_clickable" object_id="{{ media.id }}" service_id="{{ media.service.id }}">
+	<img class="main" src="{% if media.image_url_tn %}{{ media.image_url_tn }}{% else %}{{ media.image_url }}{% endif %}"><br>
+	<p>{{ media.name }}</p>
+    </div>
+
+{% with recorded=media|media_is_recorded:entry %}
+{% if not recorded %}
+<div class="add_media" media_id="{{ media.id }}">ADD</div>
+{% else %}
+<div class="remove_media" media_id="{{ media.id }}">REMOVE</div>
+{% endif %}
+{% endwith %}
+=======
+<div class="res_item">
+	<div class="res_item_clickable">
+		<a href="{% url entry_preview website.id entry.id service.id media.id %}" title="{{ search_type }}">
+			<img class="main" src="{% if media.image_url_tn %}{{ media.image_url_tn }}{% else %}{{ media.image_url }}{% endif %}">
+		</a>
+		<br />
+		<p>{{ media.name }}</p>
+	</div>
+>>>>>>> customize_media_entry
+
+	{% include "mapper/site/results/record_include.html" %}
+</div>

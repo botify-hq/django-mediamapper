@@ -1,0 +1,111 @@
+{% extends "mapper/base.html" %}
+{% load i18n %}
+{% block title %}{{ entry.name }}{% endblock %}
+{% block head_js %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}js/entry.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript">
+    var entry =  '{% url mapper:entry content_type.id entry.id %}';
+</script>
+<script>
+/*$(function() {
+	$( ".sortable" ).sortable();
+	$( ".sortable" ).disableSelection();
+});*/
+</script>
+{% endblock %}
+{% block main_content %}
+{% block head_css %}
+{{ block.super }}
+<link type="text/css" href="{{ STATIC_URL }}css/entry.css" rel="stylesheet" />
+{% endblock %}
+
+<div id="main_1">
+
+<h1>{{ entry.name }}</h1>
+{{ content_type }} / id: {{ entry.id }} {% if entry.get_absolute_url %} / <a href="{{ entry.get_absolute_url }}" target="_blank">{% trans "Visit Page" %}</a>{% endif %}
+
+<div id="services_type">
+{% for t in content_type.config.types %}
+    <a href="" class="{{ t }} {% if forloop.first %}active{% endif %}">{{ t }}</a>
+{% endfor %}
+</div>
+<div class="services_type video" type="video">
+	<div class="s_item imported active video">{% trans "imported" %}</div>
+	{% for s in services_videos %}
+		<div class="s_item service" slug="{{ s.slug }}">{{ s.name }}</div>
+	{% endfor %}
+	<div class="clear"></div>
+</div>
+<div class="services_type photo" type="photo">
+	<div class="s_item imported active">{% trans "imported" %}</div>
+	{% for s in services_photos %}
+		<div class="s_item service" slug="{{ s.slug }}">{{ s.name }}</div>
+	{% endfor %}
+	<div class="clear"></div>
+</div>
+    
+
+<div id="services_items">
+{% for s in services %}
+<div id="service_{{ s.slug }}" class="service_item">
+	{% if s.implements_keywords_search %}
+	<div class="service_item_keywords">
+	<form action="{% url mapper:entry_search content_type.id entry.id %}" method="post" class="search_entry">
+	{% csrf_token %}
+	<input type="hidden" name="service_slug" class="service_id" value="{{ s.slug }}" />
+	<input type="hidden" name="action" class="action" value="keyword" />
+	
+	By keyword : <input type="text" name="keyword" class="keyword" value="{{ entry.name|escapejs }}">
+	
+	<input type="submit" name="" value="OK">
+	</form>
+	</div>
+	{% endif %}
+
+	{% if s.implements_user_search %}
+	<div class="service_item_user">
+	<form action="{% url mapper:entry_search content_type.id entry.id %}" method="post" class="search_entry">
+	{% csrf_token %}
+	<input type="hidden" name="service_slug" class="service_id" value="{{ s.slug }}"/>
+	<input type="hidden" name="action" class="action" value="user"/>
+	
+	By user : <input type="text" name="keyword" class="keyword" value=""/>
+
+    {% if s.implements_user_albums %}
+     <select name="search_type" class="search_type">
+         <option value="media">{{ s.type|lower }}s</option>
+         <option value="albums">Albums</option>
+     </select>
+     {% else %}
+        <input type="hidden" name="search_type"  class="search_type" value="media"/>
+     {% endif %}
+
+	<input type="submit" name="" value="OK"/>
+	</form>
+	</div>
+	{% endif %}
+	
+	<div class="clear"></div>
+
+</div>
+{% endfor %}
+</div>
+
+<div id="imported" class="videos_list sortable">
+
+</div>
+
+<div id="results" class="videos_list"></div>
+
+<div class="searching videos_list" style="display:none;">{% trans "Search..." %}</div>
+
+</div>
+
+<div id="main_2" class="hidden">
+	<div id="preview">
+
+	</div>
+</div>
+{% endblock %}

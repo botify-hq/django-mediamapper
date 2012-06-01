@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<h2>{% trans "Results" %}</h2>
+
+{% if action == "keyword" %}
+	<p>{% blocktrans with nb=results.index.total_results %}{{ nb }} results for keyword search : {{ keyword }}{% endblocktrans %}</p>
+{% endif %}
+
+{% if action == "user" %}
+	<p>{% blocktrans with nb=results.index.total_results %}{{ nb }} results for username : {{ keyword }}{% endblocktrans %}</p>
+{% endif %}
+
+{% if action == "album" %}
+	<p>{% blocktrans with nb=results.index.total_results %}{{ nb }} results for this album{% endblocktrans %}</p>
+{% endif %}
+
+{% for r in results.results %}
+	{% include "mapper/results/media_include.html" with media=r %}
+{% endfor %}
+
+<div class="clear"></div>
+
+{% include "mapper/results/pagination.html" %}

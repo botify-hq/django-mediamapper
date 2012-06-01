@@ -1,0 +1,11 @@
+{% load mapper_utils %}
+<div class="res_item" id="{{ media.id }}">
+	<div class="res_item_clickable">
+		<a href="{% url mapper:entry_preview content_type.id entry.id media.service media.id %}" title="{{ search_type }}" media_id="{{ media.id }}">
+			<img class="main" src="{% if media.image_url_tn %}{{ media.image_url_tn }}{% else %}{{ media.image_url }}{% endif %}">
+		</a>
+		<p>{{ media.name }}</p>
+	</div>
+
+	{% include "mapper/results/record_include.html" %}
+</div>

@@ -1,0 +1,11 @@
+<div id="enable_sort">
+	<a href="" class="sort">Sort</a>
+	<a href="{% url mapper:entry_sort content_type.id entry.id %}" class="savesort">Save sorting</a>
+</div>
+{% for media in medias %}
+    {% include "mapper/results/media_include.html" with service=media.service %}
+{% empty %}
+    <div id="imported_no">
+    Click on a service above and map your first media !
+    </div>
+{% endfor %}

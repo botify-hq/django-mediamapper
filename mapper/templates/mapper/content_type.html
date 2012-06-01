@@ -1,0 +1,12 @@
+{% extends "mapper/base.html" %}
+{% load i18n %}
+{% block title %}{{ content_type }}{% endblock %}
+{% block main_content %}
+
+<h1>{{ content_type.name }} : {% trans "List of entries" %}</h1>
+
+{% for entry in entries %}
+	<a href="{% url mapper:entry content_type.id entry.id %}">{{ entry.name }}</a><br>
+{% endfor %}
+
+{% endblock %}

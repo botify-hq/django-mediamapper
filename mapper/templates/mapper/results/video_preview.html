@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load mapper_utils %}
+
+<h2 type="edit_title">{% if media_entry.name %}{{ media_entry.name }}{% else %}{{ object.name }}{% endif %}</h2>
+
+<form action="{% url mapper:entry content_type.id entry.id %}" method="post" id="preview-form" style="display: none;">
+    {% csrf_token %}
+    <input class="title" type="text" name="title" value=""/>
+    <input type="hidden" name="media_id" value="{{ object.id }}" />
+    <input class="submit_title" type="submit" name="submit" value="OK"/>
+</form>
+
+<div id="embed">
+{% autoescape off %}
+{{ object.get_embed }}
+{% endautoescape %}
+</div>
+
+{% include "mapper/results/record_include.html" with media=object %}
+
+{% if object.description %}
+<p class="edit_description" type="edit_description">{% if media_entry.description %}{{ media_entry.description }}{% else %}{{ object.description }}{% endif %}</p>
+{% endif %}
+
+<div class="original_content">
+    <p class="title {% if media_entry.name %}modified{% endif %}">Original title : <span class="content">{{ object.name }}</span><a href="original_title">{% trans "Set original title" %}</a></p>
+    <p class="description {% if media_entry.description %}modified{% endif %}">Original description : <span class="content">{{ object.description }}</span><a href="original_description">{% trans "Set original description" %}</a></p>
+</div>
+
+<p>Permalink : <a href="{{ object.permalink_url }}" target="_blank">{{ object.permalink_url }}</a>
+
+<br/>Service : {{ object.service.name }}
+
+{% if object.user_name %}
+<br/>Copyright <a href="{{ object.user_url }}" target="_blank">{{ object.user_name }}</a>
+{% endif %}
+
+
+    <div id="media_type_choice" type="media_type">
+        {% if media_entry.media_type %}{{ media_entry.media_type }}{% else %}{% trans "Select a type for this video" %}{% endif %}
+    </div>
+    <div id="choices">
+        {% for media_type in media_types %}
+            {{ media_type.name }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    </div>
+
+<script type="text/javascript">
+var edit_media_field_url = '{% url mapper:edit_media_field content_type.id entry.id object.id %}';
+var rollback_media_field_url = '{% url mapper:rollback_media_field content_type.id entry.id object.id %}';
+</script>

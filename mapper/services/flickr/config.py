@@ -1,0 +1,10 @@
+NAME = "Flickr"
+SLUG = "flickr"
+URL = "http://www.flickr.com"
+DESCRIPTION = ""
+TYPE = "photo"
+
+IMPLEMENTS_KEYWORDS_SEARCH  = True
+IMPLEMENTS_USER_SEARCH  = True
+IMPLEMENTS_LOCATION_SEARCH  = False
+IMPLEMENTS_USER_ALBUMS  = False

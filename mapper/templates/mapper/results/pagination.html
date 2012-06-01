@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<div class="buttons">
+{% if page > 1 %}
+	<span class="page_btn" id="previous_page_btn">{% trans "Previous Page" %}</span>
+	<form action="{% url mapper:entry_search content_type.id entry.id %}" method="post" class="search_entry" style="display: none;">
+		{% csrf_token %}
+		<input type="hidden" name="num" value="{{ page|add:"-1" }}" />
+		<input type="hidden" name="service_id" value="{{ service.id }}" />
+		<input type="hidden" name="action" value="{{ action }}" />
+		<input type="hidden" name="keyword" value="{{ keyword }}" />
+		<input type="hidden" name="search_type" value="{{ search_type }}" />
+	</form>
+{% endif %}
+
+{% if next_page %}
+	<span class="page_btn" id="next_page_btn">{% trans "Next Page" %}</span>
+	<form action="{% url mapper:entry_search content_type.id entry.id %}" method="post" class="search_entry" style="display: none;">
+		{% csrf_token %}
+		<input type="hidden" name="num" value="{{ next_page }}" />
+		<input type="hidden" name="service_id" value="{{ service.id }}" />
+		<input type="hidden" name="action" value="{{ action }}" />
+		<input type="hidden" name="keyword" value="{{ keyword }}" />
+		<input type="hidden" name="search_type" value="{{ search_type }}" />
+	</form>
+{% endif %}
+
+</div>

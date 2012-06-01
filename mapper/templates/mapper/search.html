@@ -1,0 +1,7 @@
+{% load i18n %}
+{% for r in results %}
+	{% for entry in r.results %}
+	<li><a href="{% url mapper:entry r.content_type.id entry.id %}">{{ entry.name }} ({{ r.content_type }})</a></li>
+	{% empty %}
+	{% endfor %}
+{% endfor %}

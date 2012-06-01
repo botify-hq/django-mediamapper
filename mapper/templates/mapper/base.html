@@ -1,0 +1,83 @@
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{% block title %}{% endblock %}{% block title_suffix %} - Media Mapper{% endblock %}</title>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements --> 
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]--> 
+ 
+	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script> 
+ 
+    <!-- Le styles --> 
+
+    <link type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="{{ STATIC_URL }}css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.editinplace.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/site.js"></script>
+
+    <script type="text/javascript">
+        var media_url = '{{ MEDIA_URL }}';
+    </script>
+    
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.liveSearch.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".search-query").liveSearch({url:'{% url mapper:model_search  %}?q=',id:'search_results_div'});
+});
+</script>
+    
+    {% block head_js %}{% endblock %}
+    {% block head_css %}{% endblock %}
+</head>
+
+
+
+<body id="{% block body_id %}{% endblock %}"> 
+    <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+        <a class="brand" href="{% url mapper:home %}">
+    MediaMapper
+    </a>
+	<ul class="nav">
+	{% for m in content_types %}
+	<li><a href="{% url mapper:model_home m.id %}">{{ m }}</a></li>
+	{% endfor %}
+	</ul>
+
+<ul id="search_results_ul">
+<form class="navbar-search pull-left">
+  <input type="text" class="search-query" placeholder="Search">
+  <div id="search_results_div" class="typeahead dropdown-menu"></div>
+</form>
+</ul>
+</div>
+    </div>
+    </div>
+
+<div id="main">
+	{% block main_content %}{% endblock %}
+</div>
+
+<div style="clear:both"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+	{% if messages %}
+		{% for m in messages %}//{{ m }}{% endfor %}
+	{% endif %}
+	{% block extend_body_js %}{% endblock %}
+	
+});
+//]]>
+</script>
+</body> 
+</html>

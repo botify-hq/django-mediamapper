@@ -1,0 +1,52 @@
+#message_box {
+  display: none; }
+  #message_box li {
+    float: none; }
+
+#message_box_floating {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  width: 960px;
+  z-index: 99999; }
+
+.message .close {
+  float: right;
+  right: 5px;
+  cursor: pointer; }
+
+.message_success, .message_info, .message_error, p.warning {
+  padding: 5px;
+  font-size: 11pt;
+  margin-bottom: 10px; }
+  .message_success h3, .message_info h3, .message_error h3, p.warning h3 {
+    margin-bottom: 10px; }
+    .message_success h3.alone, .message_info h3.alone, .message_error h3.alone, p.warning h3.alone {
+      margin-bottom: 0; }
+
+.message_success, .message_info, p.warning {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -icab-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #fef2cc;
+  color: #372b03;
+  border: 1px solid #f7dc73; }
+  .message_success h3, .message_info h3, p.warning h3 {
+    color: #372b03; }
+
+.message_error {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -icab-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #f7e5e5;
+  color: #ad0000;
+  border: 1px solid #c74f50; }
+  .message_error h3 {
+    color: #ad0000; }

@@ -1,0 +1,7 @@
+			<div id="wrapper_{{ field.name }}" class="field_wrapper{% if field.errors %} error{% endif %}">
+				{% if field.errors %}<div class="errors">{{ field.errors }}</div>{% endif %}
+				{{ field.label_tag }}{{ field }}
+				{% if field.help_text %}<p class="help_text">{{ field.help_text }}</p>{% endif %}
+				<div class="clear"></div>
+			</div>
+

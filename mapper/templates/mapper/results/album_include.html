@@ -1,0 +1,10 @@
+{% load mapper_utils %}
+<div class="res_item">
+	<div class="res_item_clickable">
+		<a href="{% url mapper:entry_from_album_search website.id entry.id service.slug media.id %}" title="{{ search_type }}">
+			<img src="{% if media.url_image_tn %}{{ media.url_image_tn }}{% else %}{{ media.image_url }}{% endif %}">
+		</a>
+		<br />
+	</div>
+    {{ media.name }}
+</div>

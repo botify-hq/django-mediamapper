@@ -1,0 +1,29 @@
+{% load mapper_utils %}{% load i18n %}
+
+<h2 type="edit_title">{% if media_entry.name %}{{ media_entry.name }}{% else %}{{ object.name }}{% endif %}</h2>
+
+
+<div id="embed">
+<img src="{{ object.image_url }}" width="450">
+</div>
+
+{% include "mapper/results/record_include.html" with media=object %}
+
+{% if object.description %}
+<p class="edit_description" type="edit_description">{% if media_entry.description %}{{ media_entry.description }}{% else %}{{ object.description }}{% endif %}</p>
+{% else %}
+<p class="edit_description" type="edit_description"></p>
+{% endif %}
+
+<p>Permalink : <a href="{{ object.permalink_url }}" target="_blank">{{ object.permalink_url }}</a>
+
+    <br/>Service : {{ object.service.name }}
+
+{% if object.user_name %}
+<br/>Copyright : <a href="{{ object.user_url }}" target="_blank">{{ object.user_name }}</a>
+{% endif %}
+
+<script type="text/javascript">
+var edit_media_field_url = '{% url mapper:edit_media_field content_type.id entry.id object.id %}';
+var rollback_media_field_url = '{% url mapper:rollback_media_field content_type.id entry.id object.id %}';
+</script>

@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<h2>{% trans "Results" %}</h2>
+
+{% if action == "user" %}
+<p>{% blocktrans with nb=results.index.total_results %}{{ nb }} results for username : {{ keyword }}{% endblocktrans %}
+{% endif %}
+{% if action == "album" %}
+<p>{% blocktrans with nb=results.index.total_results %}{{ nb }} results for this album{% endblocktrans %}
+{% endif %}
+
+{% for r in results.results %}
+	{% include "mapper/results/album_include.html" with media=r service=service %}
+{% endfor %}
+
+<div class="clear"></div>
+
+{% include "mapper/results/pagination.html" %}

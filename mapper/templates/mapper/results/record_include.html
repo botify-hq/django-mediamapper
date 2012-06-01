@@ -1,0 +1,13 @@
+{% load mapper_utils %}
+
+{% with recorded=media|media_is_recorded:entry %}
+	{% if not recorded %}
+		<div class="add_media">
+			<a href="{% url mapper:entry_add_media content_type.id entry.id media.id %}">ADD</a>
+		</div>
+	{% else %}
+		<div class="remove_media">
+			<a href="{% url mapper:entry_remove_media content_type.id entry.id media.id %}">REMOVE</a>
+		</div>
+	{% endif %}
+{% endwith %}
