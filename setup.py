@@ -1,9 +1,8 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name = "Media Mapper",
     version = "0.1",
-    packages = find_packages(),
     include_package_data = True,
 
     author = "Thomas Grange",
@@ -12,8 +11,7 @@ setup(
     license = "Apache",
     keywords = "python django facebook youtube dailymoion vimeo photos videos",
     url = "http://github.com/sem-io/django-mediamapper",
-    dependency_links = ['git://github.com/sem-io/facebook-sdk-fork/#egg=facebook_sdk', 'git://github.com/dkm/python-vimeo.git#egg=vimeo', 'git://github.com/sem-io/django-extended-choices.git#egg=extended_choices'],
-    install_requires = ['BeautifulSoup>=3.2.0', 'oauth2', 'elementtree', 'facebook_sdk', 'vimeo', 'extended_choices'],
+    install_requires = ['BeautifulSoup>=3.2.0', 'oauth2', 'elementtree'],
 
     classifiers = [
         'Development Status :: 0.1 - Early Alpha',
