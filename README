@@ -1,0 +1,8 @@
+==============
+REQUIREMENTS
+==============
+
+git://github.com/sem-io/facebook-sdk-fork/#egg=facebook_sdk
+git://github.com/dkm/python-vimeo.git#egg=vimeo
+git://github.com/sem-io/django-extended-choices.git#egg=extended_choices
+
