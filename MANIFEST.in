@@ -1,1 +1,2 @@
 recursive-include mapper/templates *
+recursive-include mapper/static *
