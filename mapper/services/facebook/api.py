@@ -60,7 +60,7 @@ class Api(BaseApi):
 
             data['results'].append({
                 'id': r['id'],
-                'name': r['name'],
+                'name': r.get('name', ''),
                 'image_url': image_url,
                 'image_url_tn': image_url,
                 'description': '',
@@ -87,9 +87,10 @@ class Api(BaseApi):
         }
 
         for r in result:
+            print r
             data['results'].append({
                 'id': r['id'],
-                'name': r['name'],
+                'name': r.get('name',''),
                 'image_url': r['source'],
                 'image_url_tn': r['picture'],
                 'description': '',

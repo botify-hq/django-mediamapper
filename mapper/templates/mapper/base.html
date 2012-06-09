@@ -48,7 +48,7 @@ $(document).ready(function() {
     </a>
 	<ul class="nav">
 	{% for m in content_types %}
-	<li><a href="{% url mapper:model_home m.id %}">{{ m }}</a></li>
+	<li><a href="{% url mapper:model_home m.id %}">{{ m|lower|capfirst }}</a></li>
 	{% endfor %}
 	</ul>
 

@@ -213,22 +213,22 @@ class EntryServiceSearchView(View):
 entry_service_search = EntryServiceSearchView.as_view()
 
 class EntryFromAlbumServiceSearchView(View):
-    def get(self, request, site_id, entry_id, service_id, object_id):
+    def get(self, request, model_id, entry_id, service_slug, object_id):
         action = "album"
 
-        website = get_object_or_404(Site, pk=site_id)
-        entry = get_object_or_404(Entry, pk=entry_id)
-        service = get_object_or_404(Service, pk=service_id)
+        content_type = get_object_or_404(ContentType, pk=model_id)
+        service = get_service_from_slug(service_slug)
         service.record_results = True
+        entry = get_object_or_404(content_type.model_class(), pk=entry_id)
 
-        res = service.search_by_album_id(object_id)
+        res = service.search_by_album_id(object_id, entry=entry)
 
         return render(request, 'mapper/results/results_media.html', {
             "results": res,
             "entry": entry,
             "service": service,
             "action": action,
-            'website': website
+            "content_type": content_type,
         })
 
 entry_from_album_service_search = EntryFromAlbumServiceSearchView.as_view()
